@@ -40,3 +40,9 @@ npm run test:unit # or `npm run test:unit:ci` for headless testing
 npm run build
 npm run test:e2e # or `npm run test:e2e:ci` for headless testing
 ```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+npm run lint
+```

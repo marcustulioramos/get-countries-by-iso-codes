@@ -1,7 +1,7 @@
 <template>
   <div class="greetings">
     <h1 class="text-orange-500" data-cy="SearchTittle">BUD Task</h1>
-    <h2 class="text-base text-slate-300">Type the Country Code:</h2>
+    <h2 class="text-base text-slate-300">Type the ISO Country Code:</h2>
     <div>
       <input
         type="text"
@@ -49,6 +49,11 @@ import { mapState, mapActions } from 'vuex';
         this.$store.commit('clearErrorMsg', this.errorMsg)
         this.$store.commit('countryCode', this.countryCode)
         this.getCountry(this.countryCode)
+          .then((response) => {
+            })
+            .catch((error) => {
+              
+            })
         
         this.countryCode = ""        
       },

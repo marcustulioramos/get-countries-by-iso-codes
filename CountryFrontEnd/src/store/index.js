@@ -7,7 +7,7 @@ const store = createStore({
   state () {
     return {
       internalApiUrl: 'https://localhost:7232',
-      worldBanApiUrl: 'http://api.worldbank.org/v2/country',
+      worldBankApiUrl: 'http://api.worldbank.org/v2/country/',
       countryCode:'',
       country: {
         Name:'',
@@ -26,6 +26,14 @@ const store = createStore({
   mutations: {
     countryCode (state, countryCode) {
       state.countryCode = countryCode
+    },
+    clearCountry (state, countryCode) {
+      state.country.Name = '',
+      state.country.CountryCode = '',
+      state.country.Region = '',
+      state.country.CapitalCity = '',
+      state.country.Longitude = '',
+      state.country.Latitude = ''
     },
     clearCountryCode (state, countryCode) {
       state.countryCode = countryCode
@@ -49,28 +57,50 @@ const store = createStore({
   },
   actions: {
     getCountry() {
-      axios.get(`${this.state.apiUrl}/Countries/api/DetailsIso/${this.state.countryCode}`)
-            .then((response) => {
-              if (response.status === 200 && response.data) {
-                  this.state.country.Name = response.data[0].name,
-                  this.state.country.CountryCode = response.data[0].countryCode,
-                  this.state.country.Region = response.data[0].region,
-                  this.state.country.CapitalCity = response.data[0].capitalCity,
-                  this.state.country.Longitude = response.data[0].longitude,
-                  this.state.country.Latitude = response.data[0].latitude
-                }
+      if (!this.state.internalApi) {
+        return new Promise((resolve, reject) => {
+          axios.get(`${this.state.worldBankApiUrl}${this.state.countryCode}?format=json`)
+                .then((response) => {
+                      this.state.country.Name = response.data[1][0].name,
+                      this.state.country.CountryCode = response.data[1][0].iso2Code,
+                      this.state.country.Region = response.data[1][0].region.value,
+                      this.state.country.CapitalCity = response.data[1][0].capitalCity,
+                      this.state.country.Longitude = response.data[1][0].longitude,
+                      this.state.country.Latitude = response.data[1][0].latitude,
+                      resolve(response)
+                })
+                  .catch((error) => {
+                      this.state.errorMsg = "The ISO code is invalid"
+                      store.dispatch('clearCountryCode')
+                      store.dispatch('clearCountry')
+                      reject(error)
+                })
+        })
+      }
+      if (this.state.internalApi) {
+        axios.get(`${this.state.internalApiUrl}/Countries/api/DetailsIso/${this.state.countryCode}`)
+              .then((response) => {
+                if (response.status === 200 && response.data) {
+                    this.state.country.Name = response.data[0].name,
+                    this.state.country.CountryCode = response.data[0].countryCode,
+                    this.state.country.Region = response.data[0].region,
+                    this.state.country.CapitalCity = response.data[0].capitalCity,
+                    this.state.country.Longitude = response.data[0].longitude,
+                    this.state.country.Latitude = response.data[0].latitude
+                  }
+                })
+                .catch((error) => {
+                  if (error.response.status === 404) {
+                    console.log(error.response.status)
+                    this.state.errorMsg = "The ISO code is invalid"
+                    store.dispatch('clearCountryCode')
+                  }
               })
-              .catch((error) => {
-                if (error.response.status === 404) {
-                  console.log(error.response.status)
-                  this.state.errorMsg = "The CountryCode is incorrect"
-                  store.dispatch('clearCountryCode')
-                }
-            })
+      }
     },
     createCountry({ state, commit }, countryCreate) {
       return new Promise((resolve, reject) => {
-        axios.post(`${this.state.apiUrl}/Countries`, countryCreate)
+        axios.post(`${this.state.internalApiUrl}/Countries`, countryCreate)
               .then((response) => {
                 this.state.createOkMsg = "The country was added successfully!"
                 resolve(response)
@@ -83,6 +113,9 @@ const store = createStore({
     },
     clearCountryCode (context) {
       context.commit('clearCountryCode')
+    },
+    clearCountry (context) {
+      context.commit('clearCountry')
     }
   }
 })

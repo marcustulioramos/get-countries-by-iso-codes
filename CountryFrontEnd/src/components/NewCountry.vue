@@ -1,12 +1,13 @@
 <template>
-  <div class="w-auto p-3 mb-5 border rounded-lg border-slate-400">
+  <div v-show="this.$store.state.internalApi" class="w-auto p-3 mb-5 border rounded-lg border-slate-400">
     <h1 class="mb-3 text-lg text-orange-500">Add new country</h1>
     <div>
-      <form>
+      <form @submit.prevent="submitForm">
         <div class="grid grid-cols-2 gap-4">
           <div class="mb-6 form-group">
             <input
               type="text"
+              required
               v-model="countryCreate.name"
               class="form-control w-full px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
               id="countryName"
@@ -16,6 +17,7 @@
           <div class="mb-6 form-group">
             <input
               type="text"
+              required
               v-model="countryCreate.countryCode"
               class="form-control w-full float-left px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
               id="countryCode"
@@ -27,6 +29,7 @@
           <div class="mb-6 form-group">
             <input
               type="text"
+              required
               v-model="countryCreate.capitalCity"
               class="form-control w-full px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
               id="capitalCity"
@@ -36,6 +39,7 @@
           <div class="mb-6 form-group">
             <input
               type="text"
+              required
               v-model="countryCreate.region"
               class="form-control w-full float-left px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
               id="region"
@@ -46,6 +50,7 @@
           <div class="mb-6 form-group">
             <input
               type="text"
+              required
               v-model="countryCreate.longitude"
               class="form-control w-full px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
               id="longitude"
@@ -55,6 +60,7 @@
           <div class="mb-6 form-group">
             <input
               type="text"
+              required
               v-model="countryCreate.latitude"
               class="form-control w-full float-left px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
               id="latitude"
@@ -64,7 +70,6 @@
        
         <button
           type="submit"
-          @click="submitForm"
           class="w-full px-6 py-2.5 bg-orange-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-orange-700 hover:shadow-lg focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out">
           Submit
         </button>

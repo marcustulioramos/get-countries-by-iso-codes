@@ -1,69 +1,64 @@
 <template>
-  <div v-show="this.$store.state.countryCode" class="w-auto p-3 mb-5 border rounded-lg border-slate-500">
-    <h1 class="text-lg text-orange-500">Country details</h1>
-    <div class="flex flex-col">
-        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div class="inline-block min-w-full py-4 sm:px-6 lg:px-8">
-            <div class="overflow-hidden rounded-lg">
-                <table class="min-w-full text-center table-auto">
-                    <thead class="bg-orange-500 border-b">
-                        <tr class="rounded-md">
-                            <th scope="col" class="px-6 py-4 text-sm font-medium text-white">
-                                Country
-                            </th>
-                            <th scope="col" class="px-6 py-4 text-sm font-medium text-white">
-                                Code
-                            </th>
-                            <th scope="col" class="px-6 py-4 text-sm font-medium text-white">
-                                Region
-                            </th>
-                            <th scope="col" class="px-6 py-4 text-sm font-medium text-white">
-                                Capital
-                            </th>
-                            <th scope="col" class="px-6 py-4 text-sm font-medium text-white">
-                                Longitude
-                            </th>
-                            <th scope="col" class="px-6 py-4 text-sm font-medium text-white">
-                                Latitude
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-white border-b">
-                            <td class="px-1 py-4 text-sm font-medium text-slate-900 whitespace-nowrap">
-                                {{ this.$store.state.country.Name }}
-                            </td>
-                            <td class="px-1 py-4 text-sm font-light text-slate-900 whitespace-nowrap">
-                                {{ this.$store.state.country.CountryCode }}
-                            </td>
-                            <td class="px-1 py-4 text-sm font-light text-slate-900 whitespace-nowrap">
-                                {{ this.$store.state.country.Region }}
-                            </td>
-                            <td class="px-1 py-4 text-sm font-light text-slate-900 whitespace-nowrap">
-                                {{ this.$store.state.country.CapitalCity }}
-                            </td>
-                            <td class="px-1 py-4 text-sm font-light text-slate-900 whitespace-nowrap">
-                                {{ this.$store.state.country.Longitude }}
-                            </td>
-                            <td class="px-1 py-4 text-sm font-light text-slate-900 whitespace-nowrap">
-                                {{ this.$store.state.country.Latitude }}
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            </div>
-        </div>
-        </div>
+  <div class="w-auto p-3 mb-5 border rounded-lg border-slate-400">
+      <div class="flex items-center justify-between mb-4">
+        <h5 class="text-lg font-bold leading-none text-orange-500 dark:text-orange-500">Country details</h5>
+        <a href="#" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"></a>
+      </div>
+      <div class="flow-root">
+        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+            <li class="py-2 sm:py-2">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">Country: <span class="text-orange-500">{{ this.$store.state.country.Name }}</span></p>
+                    </div>
+                </div>
+            </li>
+            <li class="py-2 sm:py-2">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">Code: <span class="text-orange-500">{{ this.$store.state.country.CountryCode }}</span></p>
+                    </div>
+                </div>
+            </li>
+            <li class="py-2 sm:py-2">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">Region: <span class="text-orange-500">{{ this.$store.state.country.Region }}</span></p>
+                    </div>
+                </div>
+            </li>
+            <li class="py-2 sm:py-2">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">Capital City: <span class="text-orange-500">{{ this.$store.state.country.CapitalCity }}</span></p>
+                    </div>
+                </div>
+            </li>
+            <li class="py-2 sm:py-2">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">Longitude: <span class="text-orange-500">{{ this.$store.state.country.Longitude }}</span></p>
+                    </div>
+                </div>
+            </li>
+            <li class="py-2 sm:py-2">
+                <div class="flex items-center space-x-4">
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">Latitude: <span class="text-orange-500">{{ this.$store.state.country.Latitude }}</span></p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
   </div>
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        countryCode: '',
-      }
-    },
-  }
+export default {
+  data() {
+    return {
+      countryCode: "",
+    };
+  },
+};
 </script>

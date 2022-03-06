@@ -6,7 +6,8 @@ import axios from 'axios'
 const store = createStore({
   state () {
     return {
-      apiUrl: 'https://localhost:7232',
+      internalApiUrl: 'https://localhost:7232',
+      worldBanApiUrl: 'http://api.worldbank.org/v2/country',
       countryCode:'',
       country: {
         Name:'',
@@ -19,6 +20,7 @@ const store = createStore({
       createOkMsg:'',
       createErrorMsg: '',
       errorMsg: '',
+      internalApi: false,
     }
   },
   mutations: {

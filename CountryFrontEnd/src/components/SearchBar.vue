@@ -22,6 +22,13 @@
         data-cy="SearchBtn">
         Search
       </button>
+      <button
+        type="button"
+        class="pt-2 pb-2 pl-4 pr-4 mb-10 ml-5 text-white rounded-md bg-slate-500"
+        @click="reset"
+        data-cy="ResetBtn">
+        Reset
+      </button>
     </div>
   </div>
 </template>
@@ -38,11 +45,18 @@ import { mapState, mapActions } from 'vuex';
     methods: {
       ...mapActions(['getCountry']),
       searchCountry() {
+        this.$store.commit('clearErrorMsg', this.errorMsg)
         this.$store.commit('countryCode', this.countryCode)
         this.getCountry(this.countryCode)
         
         this.countryCode = ""        
-      }
+      },
+      reset() {
+        this.countryCode = "" 
+        this.errorMsg = ''       
+        this.$store.commit('clearErrorMsg', this.errorMsg)
+        this.$store.commit('clearCountryCode', this.countryCode)        
+      },
     }
   }
 </script>

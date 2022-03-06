@@ -15,7 +15,8 @@ const store = createStore({
         CapitalCity:'',
         Longitude:'',
         Latitude:''
-      }
+      },
+      errorMsg: '',
     }
   },
   mutations: {
@@ -25,6 +26,7 @@ const store = createStore({
   },
   getter: {
     countryCode: state => state.countryCode,
+    errorMsg: state => state.errorMsg,
     apiUrl: state => state.apiUrl
   },
   actions: {
@@ -32,6 +34,7 @@ const store = createStore({
       axios.get(`${this.state.apiUrl}/Countries/api/DetailsIso/${this.state.countryCode}`)
             .then((response) => {
               if (response.status === 200 && response.data) {
+                console.log('im at the if')
                   console.log(response)
                   this.state.country.Name = response.data[0].name,
                   this.state.country.CountryCode = response.data[0].countryCode,
@@ -41,9 +44,11 @@ const store = createStore({
                   this.state.country.Latitude = response.data[0].latitude,
                   resolve(response)
                 }
-                reject('There was an error in the API!')
-            })
-            .catch((error) => {
+              })
+              .catch((error) => {
+                if (error.status === 404 && response.data)
+                console.log(error)
+                this.state.errorMsg = "The CountryCode is incorrect"
                 reject(error)
             })
     }

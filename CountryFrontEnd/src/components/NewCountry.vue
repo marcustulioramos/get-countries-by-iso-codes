@@ -12,7 +12,7 @@
               class="form-control w-full px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
               id="countryName"
               aria-describedby="emailHelp123"
-              placeholder="Country Name"/>
+              placeholder="Name"/>
           </div>
           <div class="mb-6 form-group">
             <input

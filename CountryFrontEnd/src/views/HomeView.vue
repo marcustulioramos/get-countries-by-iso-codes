@@ -3,7 +3,52 @@ import CountryInfo from "@/components/CountryInfo.vue";
 </script>
 
 <template>
-  <main>
+  <main class="w-6/12">
     <CountryInfo />
   </main>
+  <div class="w-3/4 p-3 mb-5 border rounded-lg border-slate-400">
+      <div>
+        <h2 class="font-semibold text-center text-orange-500">Click on the button bellow to use the Internal Api</h2>
+        <p class="text-center">Before toggling the Internal Api, set up the api as per instructions on the repo Readme file.</p>
+      </div>
+      <div class="flex justify-center">  
+        <button
+          v-show="this.$store.state.internalApi"
+          type="button"
+          class="pt-2 pb-2 pl-4 pr-4 mt-3 text-white bg-green-600 rounded-md"
+          @click="toggleWorldBankApi"
+          data-cy="toggleWorldBankApi">
+          Toggle World Bank Api
+        </button>
+        <button
+          v-show="!this.$store.state.internalApi"
+          type="button"
+          class="pt-2 pb-2 pl-4 pr-4 mt-3 text-white bg-green-600 rounded-md"
+          @click="toggleInternalApi"
+          data-cy="toggleInternalApi">
+          Toggle Internal Api
+        </button>
+      </div>
+    </div>
 </template>
+
+<script>
+import { mapState, mapActions } from 'vuex';
+  export default {
+    data() {
+      return {
+        internalApi: false,
+      }
+    },
+    methods: {
+      toggleInternalApi() {  
+        this.internalApi = true
+        this.$store.commit('toggleInternalApi', this.internalApi)       
+      },
+      toggleWorldBankApi() {  
+        this.internalApi = false
+        this.$store.commit('toggleInternalApi', this.internalApi)       
+      }
+    }
+  }
+</script>

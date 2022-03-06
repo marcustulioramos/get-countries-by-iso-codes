@@ -46,6 +46,9 @@ const store = createStore({
     },
     clearCreateErrorMsg (state, createErrorMsg) {
       state.createErrorMsg = createErrorMsg
+    },
+    toggleInternalApi (state, internalApi) {
+      state.internalApi = internalApi
     }
   },
   getter: {

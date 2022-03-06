@@ -1,6 +1,7 @@
 <template>
   <div class="greetings">
-    <h1 class="text-orange-500" data-cy="SearchTittle">BUD Task</h1>
+    <p v-if="(!this.$store.state.internalApi)" class="mb-5 text-3xl text-orange-500" data-cy="SearchTittle">World Bank Api</p>
+    <p v-if="(this.$store.state.internalApi)" class="mb-5 text-3xl text-orange-500" data-cy="SearchTittle">Internal Api</p>
     <h2 class="text-base text-slate-300">Type the ISO Country Code:</h2>
     <div>
       <input

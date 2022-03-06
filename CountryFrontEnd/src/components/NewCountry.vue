@@ -1,105 +1,113 @@
 <template>
-  <div>
-    <h1>Add new country</h1>
-    <div class="block max-w-md p-6 bg-white rounded-lg shadow-lg">
-        <form>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="mb-6 form-group">
-                    <input type="text" class="form-control
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput123"
-                    aria-describedby="emailHelp123" placeholder="First name">
-                </div>
-                <div class="mb-6 form-group">
-                    <input type="text" class="form-control
-                    block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput124"
-                    aria-describedby="emailHelp124" placeholder="Last name">
-                </div>
-                </div>
-                <div class="mb-6 form-group">
-                <input type="email" class="form-control block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput125"
-                    placeholder="Email address">
-                </div>
-                <div class="mb-6 form-group">
-                <input type="password" class="form-control block
-                    w-full
-                    px-3
-                    py-1.5
-                    text-base
-                    font-normal
-                    text-gray-700
-                    bg-white bg-clip-padding
-                    border border-solid border-gray-300
-                    rounded
-                    transition
-                    ease-in-out
-                    m-0
-                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="exampleInput126"
-                    placeholder="Password">
-                </div>
-                <div class="mb-6 text-center form-group form-check">
-                <input type="checkbox"
-                    class="w-4 h-4 mt-1 mr-2 align-top transition duration-200 bg-white bg-center bg-no-repeat bg-contain border border-gray-300 rounded-sm appearance-none cursor-pointer form-check-input checked:bg-blue-600 checked:border-blue-600 focus:outline-none"
-                    id="exampleCheck25" checked>
-                <label class="inline-block text-gray-800 form-check-label" for="exampleCheck25">Subscribe to our newsletter</label>
-                </div>
-                <button type="submit" class="
-                w-full
-                px-6
-                py-2.5
-                bg-blue-600
-                text-white
-                font-medium
-                text-xs
-                leading-tight
-                uppercase
-                rounded
-                shadow-md
-                hover:bg-blue-700 hover:shadow-lg
-                focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
-                active:bg-blue-800 active:shadow-lg
-                transition
-                duration-150
-                ease-in-out">Sign up</button>
-        </form>
+  <div class="w-auto p-3 mb-5 border rounded-lg border-slate-400">
+    <h1 class="mb-3 text-lg text-orange-500">Add new country</h1>
+    <div>
+      <form>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="mb-6 form-group">
+            <input
+              type="text"
+              v-model="countryCreate.name"
+              class="form-control w-full px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
+              id="countryName"
+              aria-describedby="emailHelp123"
+              placeholder="Country Name"/>
+          </div>
+          <div class="mb-6 form-group">
+            <input
+              type="text"
+              v-model="countryCreate.countryCode"
+              class="form-control w-full float-left px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
+              id="countryCode"
+              placeholder="Code"
+              maxlength = "3"/>
+          </div>
         </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="mb-6 form-group">
+            <input
+              type="text"
+              v-model="countryCreate.capitalCity"
+              class="form-control w-full px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
+              id="capitalCity"
+              aria-describedby="emailHelp123"
+              placeholder="Capital City"/>
+          </div>
+          <div class="mb-6 form-group">
+            <input
+              type="text"
+              v-model="countryCreate.region"
+              class="form-control w-full float-left px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
+              id="region"
+              placeholder="Region"/>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="mb-6 form-group">
+            <input
+              type="text"
+              v-model="countryCreate.longitude"
+              class="form-control w-full px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
+              id="longitude"
+              aria-describedby="emailHelp123"
+              placeholder="Longitude"/>
+          </div>
+          <div class="mb-6 form-group">
+            <input
+              type="text"
+              v-model="countryCreate.latitude"
+              class="form-control w-full float-left px-3 py-1.5 text-base font-normal text-slate-500 bg-transparent bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-slate-300 focus:bg-transparent focus:border-orange-500 focus:outline-none"
+              id="latitude"
+              placeholder="Latitude"/>
+          </div>
+        </div>
+       
+        <button
+          type="submit"
+          @click="submitForm"
+          class="w-full px-6 py-2.5 bg-orange-500 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-orange-700 hover:shadow-lg focus:bg-orange-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-orange-800 active:shadow-lg transition duration-150 ease-in-out">
+          Submit
+        </button>
+      </form>
+      <div>
+        <p class="mt-2 mb-2" :class="success ? 'text-green-500' : 'text-red-500'">{{ this.responseMsg }}</p>
+    </div>
+    
+    </div>
   </div>
 </template>
+
+<script>
+import { mapState, mapActions } from 'vuex';
+  export default {
+    data() {
+      return {
+          countryCreate: {
+            name: '',
+            countryCode: '',
+            region: '',
+            capitalCity: '',
+            longitude: '',
+            latitude: '',
+          },
+          responseMsg: '',
+          success: false,
+      }
+    },
+    methods: {
+      ...mapActions(['createCountry']),
+      
+      submitForm() {
+        console.log(this.countryCreate)
+        this.createCountry(this.countryCreate)
+          .then((response) => {
+              this.success = true
+              this.responseMsg = this.$store.state.createOkMsg
+          })
+          .catch((error) => {
+            this.responseMsg = this.$store.state.createErrorMsg
+          })       
+      }
+    }
+  }
+</script>

@@ -9,7 +9,8 @@
         v-model="countryCode"
         ref="countryCode"
         class="w-full px-3 py-2 mt-1 mb-2 text-sm bg-white border rounded-md shadow-sm border-slate-300 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-pink-500"
-        data-cy="SearchBar"/>
+        data-cy="SearchBar"
+        maxlength = "3"/>
     </div>
     <div>
       <p class="mb-2 text-red-500">{{ this.$store.state.errorMsg }}</p>

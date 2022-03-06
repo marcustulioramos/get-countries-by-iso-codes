@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, resolveComponent } from 'vue'
 import { createStore } from 'vuex'
 import axios from 'axios'
 
@@ -16,6 +16,8 @@ const store = createStore({
         Longitude:'',
         Latitude:''
       },
+      createOkMsg:'',
+      createErrorMsg: '',
       errorMsg: '',
     }
   },
@@ -28,11 +30,19 @@ const store = createStore({
     },
     clearErrorMsg (state, errorMsg) {
       state.errorMsg = errorMsg
+    },
+    clearCreateOkMsg (state, createOkMsg) {
+      state.createOkMsg = createOkMsg
+    },
+    clearCreateErrorMsg (state, createErrorMsg) {
+      state.createErrorMsg = createErrorMsg
     }
   },
   getter: {
     countryCode: state => state.countryCode,
     errorMsg: state => state.errorMsg,
+    createOkMsg: state => state.createOkMsg,
+    createErrorMsg: state => state.createErrorMsg,
     apiUrl: state => state.apiUrl
   },
   actions: {
@@ -55,6 +65,19 @@ const store = createStore({
                   store.dispatch('clearCountryCode')
                 }
             })
+    },
+    createCountry({ state, commit }, countryCreate) {
+      return new Promise((resolve, reject) => {
+        axios.post(`${this.state.apiUrl}/Countries`, countryCreate)
+              .then((response) => {
+                this.state.createOkMsg = "The country was added successfully!"
+                resolve(response)
+              })
+              .catch((error) => {
+                this.state.createErrorMsg = "Something wrong happened!"
+                reject(error)
+              })
+      })
     },
     clearCountryCode (context) {
       context.commit('clearCountryCode')

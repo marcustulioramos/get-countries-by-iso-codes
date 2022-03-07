@@ -16,6 +16,42 @@ describe("Testing the functionalities", () => {
         })
     })
 
+    it("Search button should be disable for empty search bar", () => {
+        // Two letters uppercase  
+        cy.get('[data-cy=SearchBar]').clear()
+        cy.get('[data-cy=SearchBtn]').should('be.disabled')  
+    })
+
+    it("Search bar should accept all ISO formats", () => {
+        // Two letters uppercase  
+        cy.get('[data-cy=SearchBar]').type('GB')
+        cy.get('[data-cy=SearchBtn]').click().then(() => {
+            cy.get('[data-cy=Name]').should('contain', 'United Kingdom')
+        })
+        cy.get('[data-cy=ResetBtn]').click()
+        
+        // Two letters uppercase 
+        cy.get('[data-cy=SearchBar]').type('GBR')
+        cy.get('[data-cy=SearchBtn]').click().then(() => {
+            cy.get('[data-cy=Name]').should('contain', 'United Kingdom')
+        })
+        cy.get('[data-cy=ResetBtn]').click()
+        
+        // Three letters lowercase 
+        cy.get('[data-cy=SearchBar]').type('gb')
+        cy.get('[data-cy=SearchBtn]').click().then(() => {
+            cy.get('[data-cy=Name]').should('contain', 'United Kingdom')
+        })
+        cy.get('[data-cy=ResetBtn]').click()
+        
+        // Three letters lowercase 
+        cy.get('[data-cy=SearchBar]').type('gbr')
+        cy.get('[data-cy=SearchBtn]').click().then(() => {
+            cy.get('[data-cy=Name]').should('contain', 'United Kingdom')
+        })
+        cy.get('[data-cy=ResetBtn]').click()
+    })
+
     it("Validation label should display the correct error message", () => {
         // Validation label
         cy.get('[data-cy=SearchBar]').type('123')

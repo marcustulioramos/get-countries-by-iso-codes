@@ -1,56 +1,19 @@
-describe("Testing the functionalities", () => {
-    beforeEach(() => {
-        cy.visit("/");
+describe("Testing API endpoints", () => {
+    // In this test I have created a new command "budNewCommand_Body" to make the api request and yields the request body.
+    //I am also using aliases instead of .then
+    it("API should return the correct status code", () => {
+        cy.budNewCommand_Body('GB').as('OK_response')
+        cy.get('@OK_response').its('1').its(0).its('id').should('eq', 'GBR')
+
+        cy.budNewCommand_Body('123').as('BAD_response')
+        cy.get('@BAD_response').its(0).its('message').its(0).its('id').should('eq', '120')
     })
 
-    it("Details container should display the correct info", () => {
-        // Details info
-        cy.get('[data-cy=SearchBar]').type('GB')
-        cy.get('[data-cy=SearchBtn]').click().then(() => {
-            cy.get('[data-cy=Name]').should('contain', 'United Kingdom')
-            cy.get('[data-cy=CountryCode]').should('contain', 'GB')
-            cy.get('[data-cy=Region]').should('contain', 'Europe & Central Asia')
-            cy.get('[data-cy=CapitalCity]').should('contain', 'London')
-            cy.get('[data-cy=Longitude]').should('contain', '-0.126236')
-            cy.get('[data-cy=Latitude]').should('contain', '51.5002')
-        })
-    })
+    it("API should return the correct data", () => {
+        cy.budNewCommand_Body('GB').as('OK_response')
+        cy.get('@OK_response').its('1').its(0).its('name').should('eq', 'United Kingdom')
 
-    it("Validation label should display the correct error message", () => {
-        // Validation label
-        cy.get('[data-cy=SearchBar]').type('123')
-        cy.get('[data-cy=SearchBtn]').click().then(() => {
-            cy.get('[data-cy=validationLabel]')
-            .should('be.visible')
-            .and('contain', 'The ISO code is invalid')
-        })
-        cy.get('[data-cy=Name]').should('not.be.visible')
+        cy.budNewCommand_Body('123').as('BAD_response')
+        cy.get('@BAD_response').its(0).its('message').its(0).its('value').should('eq', 'The provided parameter value is not valid')
     })
-
-    it("Reset button should clear all data", () => {
-        // Clear details container
-        cy.get('[data-cy=SearchBar]').type('GB')
-        cy.get('[data-cy=SearchBtn]').click().then(() => {
-            cy.get('[data-cy=Name]').should('contain', 'United Kingdom')
-        })
-        cy.get('[data-cy=ResetBtn]').click().then(() => {
-            cy.get('[data-cy=Name]').should('not.be.visible')
-        })
-
-        //clear validation label
-        cy.get('[data-cy=SearchBar]').type('123')
-        cy.get('[data-cy=SearchBtn]').click().then(() => {
-            cy.get('[data-cy=validationLabel]')
-            .should('be.visible')
-            .and('contain', 'The ISO code is invalid')
-        })
-        cy.get('[data-cy=ResetBtn]').click().then(() => {
-            cy.get('[data-cy=validationLabel]').should('not.be.visible')
-        })
-    })
-
-    afterEach(() => {
-        cy.get('[data-cy=ResetBtn]').click()
-    })
-  })
-  
+})

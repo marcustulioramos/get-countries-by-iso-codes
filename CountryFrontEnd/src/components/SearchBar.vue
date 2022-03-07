@@ -14,7 +14,7 @@
         maxlength = "3"/>
     </div>
     <div>
-      <p class="mb-2 text-red-500">{{ this.$store.state.errorMsg }}</p>
+      <p class="mb-2 text-red-500" data-cy="validationLabel">{{ this.$store.state.errorMsg }}</p>
     </div>
     <div class="flex justify-center">
       <button

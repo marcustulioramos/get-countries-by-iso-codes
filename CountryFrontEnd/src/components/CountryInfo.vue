@@ -4,8 +4,8 @@ import NewCountry from "@/components/NewCountry.vue";
 </script>
 
 <template>
-  <div>
-    <CountryDetails />
-    <NewCountry />
+  <div class="flex">
+    <CountryDetails class="w-2/5 mr-3"/>
+    <NewCountry class="w-3/5"/>
   </div>
 </template>

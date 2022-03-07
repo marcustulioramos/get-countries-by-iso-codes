@@ -1,7 +1,7 @@
 <template>
   <div class="greetings">
-    <p v-if="(!this.$store.state.internalApi)" class="mb-5 text-3xl text-orange-500" data-cy="SearchTittle">World Bank Api</p>
-    <p v-if="(this.$store.state.internalApi)" class="mb-5 text-3xl text-orange-500" data-cy="SearchTittle">Internal Api</p>
+    <p v-if="(!this.$store.state.internalApi)" class="mb-5 text-3xl text-orange-500" data-cy="SearchTittle">World Bank API</p>
+    <p v-if="(this.$store.state.internalApi)" class="mb-5 text-3xl text-orange-500" data-cy="SearchTittle">Internal API</p>
     <h2 class="text-base text-slate-300">Type the ISO Country Code:</h2>
     <div>
       <input
@@ -16,10 +16,11 @@
     <div>
       <p class="mb-2 text-red-500">{{ this.$store.state.errorMsg }}</p>
     </div>
-    <div>
+    <div class="flex justify-center">
       <button
         type="button"
-        class="pt-2 pb-2 pl-4 pr-4 mb-10 text-white bg-orange-500 rounded-md"
+        :disabled="countryCode == ''"
+        class="pt-2 pb-2 pl-4 pr-4 mb-10 text-white bg-orange-500 rounded-md disabled:bg-slate-500"
         @click="searchCountry"
         data-cy="SearchBtn">
         Search
@@ -63,6 +64,7 @@ import { mapState, mapActions } from 'vuex';
         this.errorMsg = ''       
         this.$store.commit('clearErrorMsg', this.errorMsg)
         this.$store.commit('clearCountryCode', this.countryCode)        
+        this.$store.commit('clearCountry')        
       },
     }
   }

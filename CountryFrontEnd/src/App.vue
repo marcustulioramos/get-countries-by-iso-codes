@@ -4,10 +4,11 @@ import SearchBar from "@/components/SearchBar.vue";
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/bud-logo.png" width="200" />
+    <img alt="Bud logo" class="logo" src="@/assets/bud-logo.png" width="200" />
 
-    <div class="wrapper">
+    <div class="w-1/2">
       <SearchBar />
+      
     </div>
   </header>
 

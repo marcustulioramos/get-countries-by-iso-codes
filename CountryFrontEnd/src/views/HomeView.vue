@@ -3,13 +3,13 @@ import CountryInfo from "@/components/CountryInfo.vue";
 </script>
 
 <template>
-  <main class="w-6/12">
+  <main class="w-full">
     <CountryInfo />
   </main>
   <div class="w-3/4 p-3 mb-5 border rounded-lg border-slate-400">
       <div>
-        <h2 class="font-semibold text-center text-orange-500">Click on the button bellow to use the Internal Api</h2>
-        <p class="text-center">Before toggling the Internal Api, set up the api as per instructions on the repo Readme file.</p>
+        <h2 class="font-semibold text-center text-orange-500">Click on the button bellow to use the Internal API</h2>
+        <p class="text-center">Before toggling the Internal API, set up the API as per instructions on the repo Readme file.</p>
       </div>
       <div class="flex justify-center">  
         <button
@@ -18,7 +18,7 @@ import CountryInfo from "@/components/CountryInfo.vue";
           class="pt-2 pb-2 pl-4 pr-4 mt-3 text-white bg-green-600 rounded-md"
           @click="toggleWorldBankApi"
           data-cy="toggleWorldBankApi">
-          Toggle World Bank Api
+          Toggle World Bank API
         </button>
         <button
           v-show="!this.$store.state.internalApi"
@@ -26,7 +26,7 @@ import CountryInfo from "@/components/CountryInfo.vue";
           class="pt-2 pb-2 pl-4 pr-4 mt-3 text-white bg-green-600 rounded-md"
           @click="toggleInternalApi"
           data-cy="toggleInternalApi">
-          Toggle Internal Api
+          Toggle Internal API
         </button>
       </div>
     </div>
@@ -43,11 +43,13 @@ import { mapState, mapActions } from 'vuex';
     methods: {
       toggleInternalApi() {  
         this.internalApi = true
-        this.$store.commit('toggleInternalApi', this.internalApi)       
+        this.$store.commit('toggleInternalApi', this.internalApi)
+        this.$store.commit('clearCountry')         
       },
       toggleWorldBankApi() {  
         this.internalApi = false
-        this.$store.commit('toggleInternalApi', this.internalApi)       
+        this.$store.commit('toggleInternalApi', this.internalApi)
+        this.$store.commit('clearCountry')         
       }
     }
   }
